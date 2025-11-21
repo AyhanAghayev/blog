@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bduchan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/css/posts.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+    <div class="left-container">
+      <div class="head">
+        <p class="title">ayhan aghayev</p>
+        <h3 class="head-description">
+          the most beautiful place on the internet.
+        </h3>
+      </div>
+      <div class="buttons">
+        <a href="/posts">./posts</a>
+        <a href="/">./about-me.md</a>
+        <a href="/projects">./projects</a>
+      </div>
+    </div>
+
+<div class="right-container">
+    <h1 class="right-container-title">posts</h1>
+    <div class="posts">
+        {{range .}}
+        <div onclick="location.href='/post/{{.Name | urlquery}}'" class="post-details">
+            <!-- You can strip the file extension for a cleaner title -->
+            <h1>{{.Name}}</h1>
+            <div class="post-content">
+                {{.Content}}
+            </div>
+            <div class="technologies">
+                <p>Read More -></p>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
