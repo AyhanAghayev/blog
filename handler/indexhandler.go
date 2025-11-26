@@ -28,7 +28,6 @@ var mdRenderer goldmark.Markdown = goldmark.New(
 		),
 	),
 	goldmark.WithRendererOptions(
-		html.WithXHTML(),
 		html.WithUnsafe(),
 	),
 )
