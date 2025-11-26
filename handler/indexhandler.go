@@ -12,13 +12,26 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/yuin/goldmark"
-	highlighting "github.com/yuin/goldmark-highlighting/v2"
+	"github.com/yuin/goldmark-highlighting/v2"
+	"github.com/yuin/goldmark/renderer/html"
 )
 
 type Post struct {
 	Name    string
 	Content template.HTML
 }
+
+var mdRenderer goldmark.Markdown = goldmark.New(
+	goldmark.WithExtensions(
+		highlighting.NewHighlighting(
+			highlighting.WithStyle("dracula"),
+		),
+	),
+	goldmark.WithRendererOptions(
+		html.WithXHTML(),
+		html.WithUnsafe(),
+	),
+)
 
 func ServeAbout(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./static/index.html")
@@ -50,14 +63,6 @@ func ServePosts(w http.ResponseWriter, r *http.Request) {
 			f = f[:80]
 		}
 
-		mdRenderer := goldmark.New(
-			goldmark.WithExtensions(
-				highlighting.NewHighlighting(
-					highlighting.WithStyle("dracula"),
-				),
-			),
-		)
-
 		if err := mdRenderer.Convert(f, &buf); err != nil {
 			panic(err)
 		}
@@ -87,13 +92,7 @@ func ServePost(w http.ResponseWriter, r *http.Request) {
 
 	var buf bytes.Buffer
 
-	mdRenderer := goldmark.New(
-		goldmark.WithExtensions(
-			highlighting.NewHighlighting(
-				highlighting.WithStyle("dracula"),
-			),
-		),
-	)
+
 	if err := mdRenderer.Convert(f, &buf); err != nil {
 		panic(err)
 	}
