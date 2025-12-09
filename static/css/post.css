@@ -246,7 +246,7 @@ html, body {
     padding: 6vh 5vw;
   }
 
-  .about p {
+  .about  {
     padding-left: 2vw;
     padding-right: 2vw;
   }
@@ -259,5 +259,4 @@ html, body {
   .about::before {
   display: none;
 }
-
 }
